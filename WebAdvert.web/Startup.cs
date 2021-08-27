@@ -1,3 +1,4 @@
+using AdvertApi.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAdvert.web.ServiceClients;
+using WebAdvert.web.Services;
 
 namespace WebAdvert.web
 {
@@ -36,6 +39,11 @@ namespace WebAdvert.web
             services.ConfigureApplicationCookie(options => 
                 options.LoginPath = "/Accounts/Login"
             );
+
+            services.AddAutoMapper(typeof(Startup));
+            services.AddTransient<IFileUploader, S3FileUploader>();
+            services.AddHttpClient<IAdvertApiClient, AdvertApiClient>();
+
             services.AddControllersWithViews();
         }
 

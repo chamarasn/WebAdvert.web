@@ -19,7 +19,7 @@ namespace WebAdvert.web.Controllers
             _logger = logger;
         }
 
-       // [Authorize]
+        //[Authorize]
 
         public IActionResult Index()
         {
