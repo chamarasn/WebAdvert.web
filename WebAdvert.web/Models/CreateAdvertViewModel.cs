@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebAdvert.web.Models
 {
-    public class CreateViewModel
+    public class CreateAdvertViewModel
     {
         [Required(ErrorMessage = "Title is required.")]
         public string Title { get; set; }

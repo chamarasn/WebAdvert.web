@@ -10,7 +10,7 @@ namespace WebAdvert.web
         {
             CreateMap<AdverModel, CreateAdvertModel>().ReverseMap();
             CreateMap<CreateAdvertResponse, AdvertResponse>().ReverseMap();
-            CreateMap<ConfirmAdverModel, ConfirmAdverModel>().ReverseMap();
+            CreateMap<ConfirmAdvertRequest, ConfirmAdverModel>().ReverseMap();
         }
     }
 }
