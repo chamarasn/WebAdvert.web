@@ -1,0 +1,15 @@
+﻿@model IndexViewModel
+
+<div class="card">
+    <a href="#" class="boxClick" data-id="@Model.Id">
+       @{ 
+           var defaultImageUrl = "http://www.adaderana.lk/2021/assets/images/sl_flag.gif";
+           var imageUrl = string.IsNullOrEmpty(Model.ImagePath) ? defaultImageUrl : $"https://d2ichmjesuudq2.cloudfront.net/{Model.ImagePath}";
+       }
+
+       <img src="@imageUrl" alt="Avatar" style="width:10%" />
+       <div class="container">
+           <p>@Model.Title</p>
+       </div>
+    </a>
+</div>

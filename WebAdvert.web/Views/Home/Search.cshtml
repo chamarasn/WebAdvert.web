@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNetCore.Mvc.ViewFeatures
+@model IEnumerable<WebAdvert.web.Models.SearchViewModel>
+
+<div class="row">
+    <div class="col-md-10">
+        @foreach (var item in Model)
+        {
+        <div class="border rounded border-info p-1 w-100">
+            <img src="http://nethnews.lk/images/site/4713e95052bb3358848059772c9976bf938b0ae9.png"
+                 style="width: 24px; height: 24px;" />
+            <a href="#" class="boxClick" data-id="@item.Id">@item.Title</a>
+        </div>
+        }
+    </div>
+</div>
+@Html.Partial("AdvertDetail");

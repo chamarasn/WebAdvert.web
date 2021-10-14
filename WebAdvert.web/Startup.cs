@@ -45,8 +45,10 @@ namespace WebAdvert.web
 
             services.AddAutoMapper(typeof(Startup));
             services.AddTransient<IFileUploader, S3FileUploader>();
+            services.AddHttpClient<ISearchApiClient, SearchApiClient>();
+
             services.AddHttpClient<IAdvertApiClient, AdvertApiClient>()
-                .AddPolicyHandler(GetRetryPolicy())
+                            .AddPolicyHandler(GetRetryPolicy())
                 .AddPolicyHandler(GetcircuitBreakerPatternPolicy());
 
             services.AddControllersWithViews();

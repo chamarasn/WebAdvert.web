@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using WebAdvert.web.Models;
 
 namespace WebAdvert.web.ServiceClients
 {
@@ -29,7 +30,7 @@ namespace WebAdvert.web.ServiceClients
 
         public async Task<AdvertResponse> Create(CreateAdvertModel model)
         {
-            var advertApiModel = _mapper.Map<AdverModel>(model); 
+            var advertApiModel = _mapper.Map<AdvertModel>(model); 
 
             var jsonModel = JsonConvert.SerializeObject(advertApiModel);
 
@@ -58,6 +59,22 @@ namespace WebAdvert.web.ServiceClients
                 .ConfigureAwait(false);
 
             return response.StatusCode == System.Net.HttpStatusCode.OK;
+        }
+
+        public async Task<List<Advertisement>> GetAllAsync()
+        {
+            var apiCallResponse = await _client.GetAsync(new Uri($"{_client.BaseAddress}/all")).ConfigureAwait(false);
+            var allAdvertModels = await apiCallResponse.Content.ReadAsAsync<List<AdvertModel>>().ConfigureAwait(false);
+
+            return allAdvertModels.Select(x => _mapper.Map<Advertisement>(x)).ToList();
+        }
+
+        public async Task<Advertisement> GetAsync(string advertId)
+        {
+            var apiCallResponse = await _client.GetAsync(new Uri($"{_client.BaseAddress}/{advertId}")).ConfigureAwait(false);
+            var fullAdvertModels = await apiCallResponse.Content.ReadAsAsync<AdvertModel>().ConfigureAwait(false);
+
+            return _mapper.Map<Advertisement>(fullAdvertModels);
         }
     }
 }
